@@ -44,9 +44,12 @@ const favs = document.getElementById("favs");
 // Your code goes here
 const updateCollections = (id, direction) => {
   const item = document.getElementById(id);
+  const icon = item.firstElementChild;
   if (direction === "toMain") {
+    icon.classList.replace("fa-heart-crack", "fa-heart-circle-plus");
     main.append(item);
   } else if (direction === "toFavs") {
+    icon.classList.replace("fa-heart-circle-plus", "fa-heart-crack");
     favs.append(item);
   }
 };
