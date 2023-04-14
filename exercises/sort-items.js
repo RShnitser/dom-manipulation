@@ -40,19 +40,11 @@ const sortData = (direction) => {
   const container = document.getElementById("main");
   const newArr = Array.from(allItems);
 
-  if (direction === "asc") {
-    newArr.sort((a, b) => {
-      if (a.id > b.id) return 1;
-      else if (a.id < b.id) return -1;
-      else return 0;
-    });
-  } else if (direction === "desc") {
-    newArr.sort((a, b) => {
-      if (a.id < b.id) return 1;
-      else if (a.id > b.id) return -1;
-      else return 0;
-    });
-  }
+  newArr.sort((a, b) => {
+    if (a.id > b.id) return direction === "asc" ? 1 : -1;
+    else if (a.id < b.id) return direction === "asc" ? -1 : 1;
+    else return 0;
+  });
 
   for (const item of newArr) {
     container.append(item);
