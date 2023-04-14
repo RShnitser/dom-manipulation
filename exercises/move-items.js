@@ -2,7 +2,7 @@
  * SORTING NODES WITHIN A CONTAINER
  * Please, make sure to read the following files in the exercises-info folder before you start
  * * 01 SelectNodes.md
-*/
+ */
 
 /**
  * @task
@@ -12,8 +12,7 @@
  */
 
 // Your code goes here...
-
-
+const allItems = document.querySelectorAll(".item");
 
 /**
  * @task
@@ -23,9 +22,7 @@
  * */
 
 // Your code goes here
-
-
-
+const main = document.getElementById("main");
 /**
  * @task
  * Select the favorites container by id of "favs"
@@ -34,9 +31,7 @@
  */
 
 // Your code goes here
-
-
-
+const favs = document.getElementById("favs");
 /**
  * @task
  * Create the updateCollections(id, direction) function that follows the list of requirements:
@@ -47,9 +42,14 @@
  */
 
 // Your code goes here
-
-
-
+const updateCollections = (id, direction) => {
+  const item = document.getElementById(id);
+  if (direction === "toMain") {
+    main.append(item);
+  } else if (direction === "toFavs") {
+    favs.append(item);
+  }
+};
 /**
  * @task
  * Iterate through the every item in allItems NodeList and apply the
@@ -65,5 +65,11 @@
  */
 
 // Your code goes here...
-
-
+allItems.forEach((item) => {
+  item.addEventListener("click", () => {
+    const parentId = item.parentElement.id;
+    const itemId = item.id;
+    const direction = parentId === "main" ? "toFavs" : "toMain";
+    updateCollections(itemId, direction);
+  });
+});

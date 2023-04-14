@@ -38,3 +38,53 @@
  */
 
 // Your code goes here...
+const container = document.querySelector(".cardsContainer");
+
+const getData = () => {
+  const rawData = localStorage.getItem("colors");
+  let data = {};
+  if (rawData) {
+    data = JSON.parse(rawData);
+  }
+
+  return data;
+};
+
+const setData = (data) => {
+  localStorage.setItem("colors", JSON.stringify(data));
+};
+
+const setBackgroundColor = () => {
+  const data = getData();
+
+  for (const item of container.children) {
+    if (data[item.id] !== undefined) {
+      item.style.backgroundColor = "red";
+    } else {
+      item.style.backgroundColor = "white";
+    }
+  }
+};
+
+const toggleId = (id) => {
+  const data = getData();
+  const item = document.getElementById(id);
+  if (data[item.id] !== undefined) {
+    delete data[id];
+  } else {
+    data[id] = true;
+  }
+
+  setData(data);
+};
+
+container.addEventListener("click", (e) => {
+  const itemId = e.target.id;
+
+  if (itemId !== "") {
+    toggleId(itemId);
+    setBackgroundColor();
+  }
+});
+
+setBackgroundColor();
